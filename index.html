@@ -4,21 +4,36 @@
   <meta charset="UTF-8">
   <title>Mapping Graffiti in Chicago</title>
   
-  <script type="text/javascript" src="./d3/d3.min.js"></script>
+<!--   <script type="text/javascript" src="./d3/d3.min.js"></script> -->
   
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
 
-  <link rel="stylesheet" type="text/css" href="styles.css"/>
+  <style>
+  	#map {
+  		width: 1200px;
+  		height: 900px;
+  	}
+  </style>
+  
+<!--   <link rel="stylesheet" type="text/css" href="styles.css"/> -->
 
 </head>
 <body>
 
-  <div class="container">
-    <div id="chart"></div>
-  </div>
+	<div id="map"></div>
 
-  <script type="text/javascript" src="./script.js"></script>
+  <script>
+  	var map = L.map('map').setView([41.838299, -87.706953], 11);
+		L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+              attribution: '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',
+          }).addTo(map);
+
+  </script>
 
   <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
 
