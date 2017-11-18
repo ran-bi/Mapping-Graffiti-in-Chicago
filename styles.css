@@ -1,7 +1,15 @@
-svg {
-  background-color: #F5F3F2;
-}
+
 
 text {
 	font-family: Prociono;
+}
+
+#map {
+	width: 1200px;
+	height: 900px;
+}
+
+.hexbin-hexagon {
+  stroke: #000;
+  stroke-width: .5px;
 }

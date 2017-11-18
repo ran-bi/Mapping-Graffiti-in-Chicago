@@ -9,18 +9,27 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
    integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
    crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
    crossorigin=""></script>
+
+  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+
+  <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
 
   <style>
   	#map {
   		width: 1200px;
   		height: 900px;
   	}
+    .hexbin-hexagon {
+      stroke: #000;
+      stroke-width: .5px;
+    }
   </style>
-  
-<!--   <link rel="stylesheet" type="text/css" href="styles.css"/> -->
 
 </head>
 <body>
@@ -28,11 +37,44 @@
 	<div id="map"></div>
 
   <script>
-  	var map = L.map('map').setView([41.838299, -87.706953], 11);
-		L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-              attribution: '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',
-          }).addTo(map);
+    var center = [41.838299, -87.706953];
 
+    var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+        mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
+        mapLayer = L.tileLayer(mapUrl, {attribution: mapAttrib});
+
+    map = new L.Map('map', {layers: [mapLayer], center: new L.LatLng(center[0], center[1]), zoom: 11});
+
+    var options = {
+      radius : 12,
+      opacity: 0.5,
+      duration: 500
+    };
+
+    var hexLayer = L.hexbinLayer(options).addTo(map)
+    hexLayer.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
+    hexLayer
+      .radiusRange([6, 11])
+      .lng(function(d) { return d[0]; })
+      .lat(function(d) { return d[1]; })
+      .colorValue(function(d) { return d.length; });
+/*    
+    var data = [[41.82667997,-87.67258908], [41.95817637, -87.65637593],[41.93939324, -87.6840715]];
+
+    hexLayer.data(data);
+*/
+var latFn = d3.randomNormal(center[0], 1);
+var longFn = d3.randomNormal(center[1], 1);
+
+var generateData = function(){
+    var data = [];
+    for(i=0; i<1000; i++){
+        data.push([longFn(),  latFn()]);
+    }
+    hexLayer.data(data);
+};
+
+generateData();
   </script>
 
   <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
