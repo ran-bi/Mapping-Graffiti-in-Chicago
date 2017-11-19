@@ -32,58 +32,64 @@
         zoom = 11,
         map = L.map('map').setView(center, zoom);
 
-    var mapUrl = 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',
-        mapUrl2 = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
+    var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+        mapUrl2 = 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png'
         mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
         mapLayerLeft = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map),
         mapLayerRight = L.tileLayer(mapUrl2, {attribution: mapAttrib}).addTo(map);
-/*
+
     var options = {
       radius : 10,
       opacity: 0.5,
       duration: 500
     };
 
+    var colorPalette = ['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']
+
 // hexLayer on the left
     var hexLayerLeft = L.hexbinLayer(options).addTo(map)
 
-    hexLayer1.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
-    hexLayer1
+    hexLayerLeft.colorScale().range(colorPalette);
+    hexLayerLeft
       .radiusRange([6, 11])
       .lat(function(d) { return d[0]; })
       .lng(function(d) { return d[1]; })
       .colorValue(function(d) { return d.length; });
 
-    var locations1 = [];
+    var locationsLeft = [];
 
-    d3.json("requests2016.json",function(data){
+    d3.json("data/requests2012.json",function(data){
       data.forEach(function(d){
-        locations1.push([d.latitude, d.longitude]);
+        locationsLeft.push([d.latitude, d.longitude]);
       })
     })
 
-    hexLayer1.data(locations1);
+    hexLayerLeft.data(locationsLeft);
 
-// hexLayer2
-    var hexLayer2 = L.hexbinLayer(options).addTo(map)
+// hexLayer on the right
+    var hexLayerRight = L.hexbinLayer(options).addTo(map)
 
-    hexLayer2.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
-    hexLayer2
+    hexLayerRight.colorScale().range(colorPalette);
+    hexLayerRight
       .radiusRange([6, 11])
       .lat(function(d) { return d[0]; })
       .lng(function(d) { return d[1]; })
       .colorValue(function(d) { return d.length; });
 
-    var locations2 = [];
+    var locationsRight = [];
 
-    d3.json("requests2012.json",function(data){
+    d3.json("data/requests2016.json",function(data){
       data.forEach(function(d){
-        locations2.push([d.latitude, d.longitude]);
+        locationsRight.push([d.latitude, d.longitude]);
       })
     })
 
-    hexLayer2.data(locations2);
-*/
+    hexLayerRight.data(locationsRight);
+
+//Seems useless.. sideBySide only works for tile layers
+//    var leftSide = L.layerGroup ([mapLayerLeft, hexLayerLeft]);
+//    var rightSide = L.layerGroup([mapLayerRight, hexLayerRight]);
+
     L.control.sideBySide(mapLayerLeft, mapLayerRight).addTo(map);
 
 
