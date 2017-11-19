@@ -18,6 +18,8 @@
 
   <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
 
+  <script src="leaflet-side-by-side.js"></script>
+
   <link rel="stylesheet" type="text/css" href="styles.css"/>
 
 </head>
@@ -26,41 +28,64 @@
 	<div id="map"></div>
 
   <script>
-    var center = [41.838299, -87.706953];
+    var center = [41.838299, -87.706953],
+        zoom = 11,
+        map = L.map('map').setView(center, zoom);
 
-    var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+    var mapUrl = 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',
+        mapUrl2 = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
         mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
-        mapLayer = L.tileLayer(mapUrl, {attribution: mapAttrib});
-
-    map = new L.Map('map', {layers: [mapLayer], center: new L.LatLng(center[0], center[1]), zoom: 11});
-
+        mapLayerLeft = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map),
+        mapLayerRight = L.tileLayer(mapUrl2, {attribution: mapAttrib}).addTo(map);
+/*
     var options = {
-      radius : 12,
+      radius : 10,
       opacity: 0.5,
       duration: 500
     };
 
-    var hexLayer = L.hexbinLayer(options).addTo(map)
+// hexLayer on the left
+    var hexLayerLeft = L.hexbinLayer(options).addTo(map)
 
-    hexLayer.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
-    hexLayer
+    hexLayer1.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
+    hexLayer1
       .radiusRange([6, 11])
       .lat(function(d) { return d[0]; })
       .lng(function(d) { return d[1]; })
-      .colorValue(function(d) { return d.length;});
+      .colorValue(function(d) { return d.length; });
 
-/*
-    var locations = [[41.93738729, -87.70970733], [41.77882758, -87.70543427], [41.86997871, -87.62659324], [41.79968009, -87.72319987], [41.93320562, -87.72687055], [41.79811939, -87.66970576], [41.79415782, -87.77179678], [41.96543515, -87.66661852], [41.93860719, -87.75542532], [41.77868639, -87.71799993]]
-    */
-    var locations = [];
+    var locations1 = [];
 
     d3.json("requests2016.json",function(data){
       data.forEach(function(d){
-        locations.push([d.latitude, d.longitude]);
+        locations1.push([d.latitude, d.longitude]);
       })
     })
 
-    hexLayer.data(locations);
+    hexLayer1.data(locations1);
+
+// hexLayer2
+    var hexLayer2 = L.hexbinLayer(options).addTo(map)
+
+    hexLayer2.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
+    hexLayer2
+      .radiusRange([6, 11])
+      .lat(function(d) { return d[0]; })
+      .lng(function(d) { return d[1]; })
+      .colorValue(function(d) { return d.length; });
+
+    var locations2 = [];
+
+    d3.json("requests2012.json",function(data){
+      data.forEach(function(d){
+        locations2.push([d.latitude, d.longitude]);
+      })
+    })
+
+    hexLayer2.data(locations2);
+*/
+    L.control.sideBySide(mapLayerLeft, mapLayerRight).addTo(map);
+
 
   </script>
 
