@@ -41,29 +41,27 @@
     };
 
     var hexLayer = L.hexbinLayer(options).addTo(map)
+
     hexLayer.colorScale().range(['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']);
     hexLayer
       .radiusRange([6, 11])
-      .lng(function(d) { return d[0]; })
-      .lat(function(d) { return d[1]; })
-      .colorValue(function(d) { return d.length; });
-/*    
-    var data = [[41.82667997,-87.67258908], [41.95817637, -87.65637593],[41.93939324, -87.6840715]];
+      .lat(function(d) { return d[0]; })
+      .lng(function(d) { return d[1]; })
+      .colorValue(function(d) { return d.length;});
 
-    hexLayer.data(data);
-*/
-var latFn = d3.randomNormal(center[0], 1);
-var longFn = d3.randomNormal(center[1], 1);
+/*
+    var locations = [[41.93738729, -87.70970733], [41.77882758, -87.70543427], [41.86997871, -87.62659324], [41.79968009, -87.72319987], [41.93320562, -87.72687055], [41.79811939, -87.66970576], [41.79415782, -87.77179678], [41.96543515, -87.66661852], [41.93860719, -87.75542532], [41.77868639, -87.71799993]]
+    */
+    var locations = [];
 
-var generateData = function(){
-    var data = [];
-    for(i=0; i<1000; i++){
-        data.push([longFn(),  latFn()]);
-    }
-    hexLayer.data(data);
-};
+    d3.json("requests2016.json",function(data){
+      data.forEach(function(d){
+        locations.push([d.latitude, d.longitude]);
+      })
+    })
 
-generateData();
+    hexLayer.data(locations);
+
   </script>
 
   <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
