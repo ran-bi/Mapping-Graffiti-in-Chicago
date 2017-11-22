@@ -1,101 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Mapping Graffiti in Chicago</title>
-  
-<!--   <script type="text/javascript" src="./d3/d3.min.js"></script> -->
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <style>
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0;}
+      #map{ height: 100% }
+    </style>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+<title>Hex Bins + leaflet</title>
+ 
+<div id="map"></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="colorbrewer.js"></script>
+<script src="hexbin.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+<script>
+var m = L.map("map").setView([41.838299, -87.706953],11);
+var buckets = 11;
+//make the map
+var _p;
 
-  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-  <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+L.layerGroup([
+    L.tileLayer("http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg",{minZoom:4,maxZoom:18}),
+  L.tileLayer("http://{s}.tile.stamen.com/terrain-lines/{z}/{x}/{y}.png",{minZoom:4,maxZoom:18,attribution:'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})
+  ]).addTo(m);
+	
+//add a tileset	
+//boston police bloter
+d3.json("data/2016_full.json",function(err,points){
+	_p = points;
+  console.log(points);
+//generate 60k random points
+var radius = 0.005;
+var hexbin = d3.hexbin()
+    .size([
+    	d3.max(points,function(v){return v[0]})-d3.min(points,function(v){return v[0]}), 
+    	d3.max(points,function(v){return v[1]})-d3.min(points,function(v){return v[1]})])
+    .radius(radius);
 
-  <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
+//create a hexbin
 
-  <script src="leaflet-side-by-side.js"></script>
+var hex = hexbin(points);
+console.log(hex);
+//populate it
 
-  <link rel="stylesheet" type="text/css" href="styles.css"/>
+//d3.mean(h, function(h) { return h[2]; })
+var q = d3.scale
+          .quantile()
+          .domain(hex.map(function(h){return d3.mean(h, function(h) { return h[2];})}).reduce(function(a,b){if(a.indexOf(b)===-1){a.push(b)};return a;},[]).sort(function(a,b){return a-b}))
+          .range(d3.range(buckets))
 
-</head>
-<body>
+//make a scale
 
-	<div id="map"></div>
+function hexagon(radius) {
+    var x0 = 0, y0 = 0;
+    return d3.range(0, 2 * Math.PI, Math.PI / 3).map(function(angle) {
+      var x1 = Math.sin(angle) * radius,
+          y1 = -Math.cos(angle) * radius,
+          dx = x1 - x0,
+          dy = y1 - y0;
+      x0 = x1, y0 = y1;
+      return [dx, dy];
+    });
+};
 
-  <script>
-    var center = [41.838299, -87.706953],
-        zoom = 11,
-        map = L.map('map').setView(center, zoom);
+//from the hexbin file, we need this to create points
 
-    var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
-        mapUrl2 = 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png'
-        mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
-        mapLayerLeft = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map),
-        mapLayerRight = L.tileLayer(mapUrl2, {attribution: mapAttrib}).addTo(map);
+var transform = hexagon(radius);
 
-    var options = {
-      radius : 10,
-      opacity: 0.5,
-      duration: 500
-    };
+//use it to create a transform function
+ transform.shift();
+ 
+//remove the first value as it's a duplicate
 
-    var colorPalette = ['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']
-
-// hexLayer on the left
-    var hexLayerLeft = L.hexbinLayer(options).addTo(map)
-
-    hexLayerLeft.colorScale().range(colorPalette);
-    hexLayerLeft
-      .radiusRange([6, 11])
-      .lat(function(d) { return d[0]; })
-      .lng(function(d) { return d[1]; })
-      .colorValue(function(d) { return d.length; });
-
-    var locationsLeft = [];
-
-    d3.json("data/requests2012.json",function(data){
-      data.forEach(function(d){
-        locationsLeft.push([d.latitude, d.longitude]);
-      })
-    })
-
-    hexLayerLeft.data(locationsLeft);
-
-// hexLayer on the right
-    var hexLayerRight = L.hexbinLayer(options).addTo(map)
-
-    hexLayerRight.colorScale().range(colorPalette);
-    hexLayerRight
-      .radiusRange([6, 11])
-      .lat(function(d) { return d[0]; })
-      .lng(function(d) { return d[1]; })
-      .colorValue(function(d) { return d.length; });
-
-    var locationsRight = [];
-
-    d3.json("data/requests2016.json",function(data){
-      data.forEach(function(d){
-        locationsRight.push([d.latitude, d.longitude]);
-      })
-    })
-
-    hexLayerRight.data(locationsRight);
-
-//Seems useless.. sideBySide only works for tile layers
-//    var leftSide = L.layerGroup ([mapLayerLeft, hexLayerLeft]);
-//    var rightSide = L.layerGroup([mapLayerRight, hexLayerRight]);
-
-    L.control.sideBySide(mapLayerLeft, mapLayerRight).addTo(map);
-
-
-  </script>
-
-  <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
-
-</body>
-</html>
+L.layerGroup(hex.map(function(h){//create a layergroup
+	return L.polygon(transform.map(function(t){//filled with polygons
+		return [h.x+t[0],h.y+t[1]];//that are the hexagons we need
+	}),{//styled like so
+		stroke:false,
+		color:colorbrewer.RdYlBu[buckets][(buckets-1)-q(d3.mean(h, function(h) { return h[2]; }))],//including color brewer colors
+		fillOpacity:0.7
+	}).bindPopup("number: "+d3.mean(h, function(h) { return h[2]; }));//with the number of points in the popup
+})).addTo(m);
+});
+</script>
