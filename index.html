@@ -14,7 +14,14 @@
 </head>
 <body>
 
+  <div id="sliderContainer">
+    <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
+    <span id="range">2012</span>
+  </div>
+
 	<div id="map" height=180 width=180></div>
+
+
 
   <script>
     // Create base map
@@ -32,42 +39,64 @@
         g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
     var colorScale = d3.scaleThreshold()
-                          .domain([2, 6])
+                          .domain([3, 6])
                           .range(["#74add1","#fdae61","#a50026"]);
     var opacityScale = d3.scaleThreshold()
                           .domain([100, 500])
                           .range([0.2,0.6,1]);
     
+    var inputValue = null;
+    var year = [2012, 2013, 2014, 2015, 2016];
+
+
     d3.queue()
       .defer(d3.json, "data/Boundaries.geojson")
+      .defer(d3.json, "data/summary2012.json")
+      .defer(d3.json, "data/summary2013.json")
       .defer(d3.json, "data/summary2014.json")
-      .await(ready)
+      .defer(d3.json, "data/summary2015.json")
+      .defer(d3.json, "data/summary2016.json")
+      .awaitAll(ready)
+
+    var collection;
+    var summaries;
     
-    function ready(error, collection, summary) {
+    function ready(error, results){
       if (error) throw error;
+
+      collection = results[0];
+      summaries = results.slice(1,6);
+      initializeColor(collection, summaries[0]);
+    }
+      
+    d3.select("#timeslide").on("input", function() {
+        updateColor(+this.value);
+    });
+
+
+    function initializeColor(collection, summary){
 
       var transform = d3.geoTransform({point: projectPoint}),
           path = d3.geoPath().projection(transform);
       
-      console.log(summary[1])
       var featureElement = g.selectAll("path")
                     .data(collection.features)
                     .enter().append("path")
                     .attr("fill", function (d) {
                       var community_id = d.properties.area_numbe,
-                          response = summary[community_id - 1]["response"];
+                          response = summary [community_id - 1]["response"];
                       return colorScale(response);
                     })
                     .attr("fill-opacity", function(d){
                       var community_id = d.properties.area_numbe,
-                          frequency = summary[community_id - 1]["requests_per_10000"];
-                      return opacityScale(frequency)
+                          frequency = summary [community_id - 1]["requests_per_10000"];
+                      return opacityScale(frequency);
                     });
 
-      map.on("moveend", update);
-      update();
+      map.on("moveend", updatePosition);
+      updatePosition();
 
-      function update(){
+      function updatePosition(){
 
         var bounds = path.bounds(collection),
             topLeft = bounds[0],
@@ -88,6 +117,21 @@
       }
     }
 
+    function updateColor(value) {
+      document.getElementById("range").innerHTML = year[value];
+      summary = summaries[value]
+      svg.selectAll("path")
+        .attr("fill", function (d) {
+          var community_id = d.properties.area_numbe,
+              response = summary [community_id - 1]["response"];
+          return colorScale(response);
+        })
+        .attr("fill-opacity", function(d){
+          var community_id = d.properties.area_numbe,
+              frequency = summary [community_id - 1]["requests_per_10000"];
+          return opacityScale(frequency);
+        });
+    }
 
 
   </script>

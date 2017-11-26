@@ -1,0 +1,618 @@
+[
+  {
+    "year": 2016,
+    "community_area": 1,
+    "response": 0.613180516,
+    "total": 1396,
+    "name": "Rogers Park",
+    "requests_per_10000": 253.8597225
+  },
+  {
+    "year": 2016,
+    "community_area": 2,
+    "response": 0.728514764,
+    "total": 2269,
+    "name": "West Ridge",
+    "requests_per_10000": 315.3929554
+  },
+  {
+    "year": 2016,
+    "community_area": 3,
+    "response": 0.534675615,
+    "total": 1788,
+    "name": "Uptown",
+    "requests_per_10000": 317.2350165
+  },
+  {
+    "year": 2016,
+    "community_area": 4,
+    "response": 0.691289383,
+    "total": 3777,
+    "name": "Lincoln Square",
+    "requests_per_10000": 956.3720153
+  },
+  {
+    "year": 2016,
+    "community_area": 5,
+    "response": 0.680449985,
+    "total": 3289,
+    "name": "North Center",
+    "requests_per_10000": 1032.102175
+  },
+  {
+    "year": 2016,
+    "community_area": 6,
+    "response": 0.513782719,
+    "total": 4317,
+    "name": "Lake View",
+    "requests_per_10000": 457.4643947
+  },
+  {
+    "year": 2016,
+    "community_area": 7,
+    "response": 0.626439429,
+    "total": 2171,
+    "name": "Lincoln Park",
+    "requests_per_10000": 338.6050284
+  },
+  {
+    "year": 2016,
+    "community_area": 8,
+    "response": 0.682550336,
+    "total": 1490,
+    "name": "Near North Side",
+    "requests_per_10000": 185.1299637
+  },
+  {
+    "year": 2016,
+    "community_area": 9,
+    "response": 0.161290323,
+    "total": 62,
+    "name": "Edison Park",
+    "requests_per_10000": 55.42147135
+  },
+  {
+    "year": 2016,
+    "community_area": 10,
+    "response": 0.768656716,
+    "total": 134,
+    "name": "Norwood Park",
+    "requests_per_10000": 36.19371742
+  },
+  {
+    "year": 2016,
+    "community_area": 11,
+    "response": 1.102389078,
+    "total": 293,
+    "name": "Jefferson Park",
+    "requests_per_10000": 115.1367494
+  },
+  {
+    "year": 2016,
+    "community_area": 12,
+    "response": 1.15625,
+    "total": 160,
+    "name": "Forest Glen",
+    "requests_per_10000": 86.44910309
+  },
+  {
+    "year": 2016,
+    "community_area": 13,
+    "response": 0.685819071,
+    "total": 818,
+    "name": "North Park",
+    "requests_per_10000": 456.193185
+  },
+  {
+    "year": 2016,
+    "community_area": 14,
+    "response": 0.671038544,
+    "total": 3736,
+    "name": "Albany Park",
+    "requests_per_10000": 724.8457569
+  },
+  {
+    "year": 2016,
+    "community_area": 15,
+    "response": 0.562955255,
+    "total": 1922,
+    "name": "Portage Park",
+    "requests_per_10000": 299.7317697
+  },
+  {
+    "year": 2016,
+    "community_area": 16,
+    "response": 0.678477376,
+    "total": 4177,
+    "name": "Irving Park",
+    "requests_per_10000": 782.8107723
+  },
+  {
+    "year": 2016,
+    "community_area": 17,
+    "response": 0.48125,
+    "total": 640,
+    "name": "Dunning",
+    "requests_per_10000": 152.6280645
+  },
+  {
+    "year": 2016,
+    "community_area": 18,
+    "response": 0.540145985,
+    "total": 274,
+    "name": "Montclare",
+    "requests_per_10000": 204.0816327
+  },
+  {
+    "year": 2016,
+    "community_area": 19,
+    "response": 0.465983714,
+    "total": 3807,
+    "name": "Belmont Cragin",
+    "requests_per_10000": 483.4715467
+  },
+  {
+    "year": 2016,
+    "community_area": 20,
+    "response": 0.561977186,
+    "total": 1315,
+    "name": "Hermosa",
+    "requests_per_10000": 525.7896841
+  },
+  {
+    "year": 2016,
+    "community_area": 21,
+    "response": 0.732721483,
+    "total": 5339,
+    "name": "Avondale",
+    "requests_per_10000": 1359.83903
+  },
+  {
+    "year": 2016,
+    "community_area": 22,
+    "response": 0.463773633,
+    "total": 7881,
+    "name": "Logan Square",
+    "requests_per_10000": 1082.688794
+  },
+  {
+    "year": 2016,
+    "community_area": 23,
+    "response": 0.646153846,
+    "total": 1885,
+    "name": "Humboldt Park",
+    "requests_per_10000": 334.676775
+  },
+  {
+    "year": 2016,
+    "community_area": 24,
+    "response": 0.460378183,
+    "total": 9149,
+    "name": "West Town",
+    "requests_per_10000": 1112.529792
+  },
+  {
+    "year": 2016,
+    "community_area": 25,
+    "response": 0.819148936,
+    "total": 752,
+    "name": "Austin",
+    "requests_per_10000": 76.33432812
+  },
+  {
+    "year": 2016,
+    "community_area": 26,
+    "response": 0.551724138,
+    "total": 174,
+    "name": "West Garfield Park",
+    "requests_per_10000": 96.66129659
+  },
+  {
+    "year": 2016,
+    "community_area": 27,
+    "response": 0.522821577,
+    "total": 241,
+    "name": "East Garfield Park",
+    "requests_per_10000": 117.1780036
+  },
+  {
+    "year": 2016,
+    "community_area": 28,
+    "response": 0.519584333,
+    "total": 2502,
+    "name": "Near West Side",
+    "requests_per_10000": 455.895483
+  },
+  {
+    "year": 2016,
+    "community_area": 29,
+    "response": 0.591666667,
+    "total": 480,
+    "name": "North Lawndale",
+    "requests_per_10000": 133.6600579
+  },
+  {
+    "year": 2016,
+    "community_area": 30,
+    "response": 0.908972973,
+    "total": 4625,
+    "name": "South Lawndale",
+    "requests_per_10000": 583.316517
+  },
+  {
+    "year": 2016,
+    "community_area": 31,
+    "response": 0.473694985,
+    "total": 4885,
+    "name": "Lower West Side",
+    "requests_per_10000": 1365.707736
+  },
+  {
+    "year": 2016,
+    "community_area": 32,
+    "response": 0.656548623,
+    "total": 1779,
+    "name": "Loop",
+    "requests_per_10000": 607.5197213
+  },
+  {
+    "year": 2016,
+    "community_area": 33,
+    "response": 0.558974359,
+    "total": 390,
+    "name": "Near South Side",
+    "requests_per_10000": 182.3281907
+  },
+  {
+    "year": 2016,
+    "community_area": 34,
+    "response": 0.569526627,
+    "total": 676,
+    "name": "Armour Square",
+    "requests_per_10000": 504.8166679
+  },
+  {
+    "year": 2016,
+    "community_area": 35,
+    "response": 0.629032258,
+    "total": 62,
+    "name": "Douglas",
+    "requests_per_10000": 33.99495559
+  },
+  {
+    "year": 2016,
+    "community_area": 36,
+    "response": 0.833333333,
+    "total": 12,
+    "name": "Oakland",
+    "requests_per_10000": 20.27712065
+  },
+  {
+    "year": 2016,
+    "community_area": 37,
+    "response": 0.87755102,
+    "total": 49,
+    "name": "Fuller Park",
+    "requests_per_10000": 170.3755216
+  },
+  {
+    "year": 2016,
+    "community_area": 38,
+    "response": 0.752941176,
+    "total": 85,
+    "name": "Grand Boulevard",
+    "requests_per_10000": 38.76145743
+  },
+  {
+    "year": 2016,
+    "community_area": 39,
+    "response": 1.12195122,
+    "total": 41,
+    "name": "Kenwood",
+    "requests_per_10000": 22.98077462
+  },
+  {
+    "year": 2016,
+    "community_area": 40,
+    "response": 0.482142857,
+    "total": 56,
+    "name": "Washington Park",
+    "requests_per_10000": 47.79380387
+  },
+  {
+    "year": 2016,
+    "community_area": 41,
+    "response": 0.620535714,
+    "total": 224,
+    "name": "Hyde Park",
+    "requests_per_10000": 87.22401776
+  },
+  {
+    "year": 2016,
+    "community_area": 42,
+    "response": 1.020618557,
+    "total": 97,
+    "name": "Woodlawn",
+    "requests_per_10000": 40.85930918
+  },
+  {
+    "year": 2016,
+    "community_area": 43,
+    "response": 1.243523316,
+    "total": 193,
+    "name": "South Shore",
+    "requests_per_10000": 37.10824841
+  },
+  {
+    "year": 2016,
+    "community_area": 44,
+    "response": 0.563218391,
+    "total": 87,
+    "name": "Chatham",
+    "requests_per_10000": 28.03919041
+  },
+  {
+    "year": 2016,
+    "community_area": 45,
+    "response": 0.921052632,
+    "total": 38,
+    "name": "Avalon Park",
+    "requests_per_10000": 37.30976927
+  },
+  {
+    "year": 2016,
+    "community_area": 46,
+    "response": 0.450784593,
+    "total": 701,
+    "name": "South Chicago",
+    "requests_per_10000": 224.6938906
+  },
+  {
+    "year": 2016,
+    "community_area": 47,
+    "response": 0.365853659,
+    "total": 41,
+    "name": "Burnside",
+    "requests_per_10000": 140.6035665
+  },
+  {
+    "year": 2016,
+    "community_area": 48,
+    "response": 0.716049383,
+    "total": 81,
+    "name": "Calumet Heights",
+    "requests_per_10000": 58.64465682
+  },
+  {
+    "year": 2016,
+    "community_area": 49,
+    "response": 0.303964758,
+    "total": 227,
+    "name": "Roseland",
+    "requests_per_10000": 50.8751877
+  },
+  {
+    "year": 2016,
+    "community_area": 50,
+    "response": 0.903225806,
+    "total": 31,
+    "name": "Pullman",
+    "requests_per_10000": 42.32081911
+  },
+  {
+    "year": 2016,
+    "community_area": 51,
+    "response": 0.723735409,
+    "total": 257,
+    "name": "South Deering",
+    "requests_per_10000": 170.097293
+  },
+  {
+    "year": 2016,
+    "community_area": 52,
+    "response": 0.378843788,
+    "total": 813,
+    "name": "East Side",
+    "requests_per_10000": 352.8339554
+  },
+  {
+    "year": 2016,
+    "community_area": 53,
+    "response": 0.535714286,
+    "total": 112,
+    "name": "West Pullman",
+    "requests_per_10000": 37.7727564
+  },
+  {
+    "year": 2016,
+    "community_area": 54,
+    "response": 1.166666667,
+    "total": 12,
+    "name": "Riverdale",
+    "requests_per_10000": 18.51280469
+  },
+  {
+    "year": 2016,
+    "community_area": 55,
+    "response": 0.453416149,
+    "total": 161,
+    "name": "Hegewisch",
+    "requests_per_10000": 170.8041587
+  },
+  {
+    "year": 2016,
+    "community_area": 56,
+    "response": 0.697240865,
+    "total": 1341,
+    "name": "Garfield Ridge",
+    "requests_per_10000": 388.5492423
+  },
+  {
+    "year": 2016,
+    "community_area": 57,
+    "response": 0.805204192,
+    "total": 2767,
+    "name": "Archer Heights",
+    "requests_per_10000": 2066.004629
+  },
+  {
+    "year": 2016,
+    "community_area": 58,
+    "response": 0.677974599,
+    "total": 5984,
+    "name": "Brighton Park",
+    "requests_per_10000": 1318.99136
+  },
+  {
+    "year": 2016,
+    "community_area": 59,
+    "response": 0.568575624,
+    "total": 3405,
+    "name": "McKinley Park",
+    "requests_per_10000": 2181.014604
+  },
+  {
+    "year": 2016,
+    "community_area": 60,
+    "response": 0.501392758,
+    "total": 1795,
+    "name": "Bridgeport",
+    "requests_per_10000": 561.3409638
+  },
+  {
+    "year": 2016,
+    "community_area": 61,
+    "response": 0.363462458,
+    "total": 2091,
+    "name": "New City",
+    "requests_per_10000": 471.1900309
+  },
+  {
+    "year": 2016,
+    "community_area": 62,
+    "response": 0.562190813,
+    "total": 2830,
+    "name": "West Elsdon",
+    "requests_per_10000": 1562.758849
+  },
+  {
+    "year": 2016,
+    "community_area": 63,
+    "response": 0.639184598,
+    "total": 4415,
+    "name": "Gage Park",
+    "requests_per_10000": 1106.682709
+  },
+  {
+    "year": 2016,
+    "community_area": 64,
+    "response": 0.506224066,
+    "total": 241,
+    "name": "Clearing",
+    "requests_per_10000": 104.1531613
+  },
+  {
+    "year": 2016,
+    "community_area": 65,
+    "response": 0.606296152,
+    "total": 2573,
+    "name": "West Lawn",
+    "requests_per_10000": 771.3985909
+  },
+  {
+    "year": 2016,
+    "community_area": 66,
+    "response": 0.519282511,
+    "total": 2230,
+    "name": "Chicago Lawn",
+    "requests_per_10000": 400.8772561
+  },
+  {
+    "year": 2016,
+    "community_area": 67,
+    "response": 0.22095672,
+    "total": 439,
+    "name": "West Englewood",
+    "requests_per_10000": 123.6445571
+  },
+  {
+    "year": 2016,
+    "community_area": 68,
+    "response": 0.37254902,
+    "total": 153,
+    "name": "Englewood",
+    "requests_per_10000": 49.91192014
+  },
+  {
+    "year": 2016,
+    "community_area": 69,
+    "response": 0.838235294,
+    "total": 68,
+    "name": "Greater Grand Crossing",
+    "requests_per_10000": 20.8576161
+  },
+  {
+    "year": 2016,
+    "community_area": 70,
+    "response": 0.566817667,
+    "total": 1766,
+    "name": "Ashburn",
+    "requests_per_10000": 429.8824274
+  },
+  {
+    "year": 2016,
+    "community_area": 71,
+    "response": 0.328947368,
+    "total": 228,
+    "name": "Auburn Gresham",
+    "requests_per_10000": 46.77594732
+  },
+  {
+    "year": 2016,
+    "community_area": 72,
+    "response": 0.244680851,
+    "total": 94,
+    "name": "Beverly",
+    "requests_per_10000": 46.9202356
+  },
+  {
+    "year": 2016,
+    "community_area": 73,
+    "response": 0.526315789,
+    "total": 57,
+    "name": "Washington Heights",
+    "requests_per_10000": 21.5151172
+  },
+  {
+    "year": 2016,
+    "community_area": 74,
+    "response": 0.1,
+    "total": 200,
+    "name": "Mount Greenwood",
+    "requests_per_10000": 104.7504321
+  },
+  {
+    "year": 2016,
+    "community_area": 75,
+    "response": 0.477272727,
+    "total": 88,
+    "name": "Morgan Park",
+    "requests_per_10000": 39.03477644
+  },
+  {
+    "year": 2016,
+    "community_area": 76,
+    "response": 0.133757962,
+    "total": 157,
+    "name": "O'Hare",
+    "requests_per_10000": 123.0793352
+  },
+  {
+    "year": 2016,
+    "community_area": 77,
+    "response": 0.559533722,
+    "total": 1201,
+    "name": "Edgewater",
+    "requests_per_10000": 212.4873941
+  }
+]
