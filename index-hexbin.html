@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <style>
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0;}
+      #map{ height: 100% }
+    </style>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+<title>Mapping Graffiti in Chicago</title>
+ 
+<div id="map" height=800 width=800></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="colorbrewer.js"></script>
+<script src="hexbin.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+<script>
+var m = L.map("map").setView([41.838299, -87.706953],11);
+var buckets = 11;
+//make the map
+var _p;
+
+L.layerGroup([
+    L.tileLayer("http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg",{minZoom:4,maxZoom:18}),
+  L.tileLayer("http://{s}.tile.stamen.com/terrain-lines/{z}/{x}/{y}.png",{minZoom:4,maxZoom:18,attribution:'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})
+  ]).addTo(m);
+	
+//add a tileset	
+//boston police bloter
+d3.json("data/2016_full.json",function(err,points){
+	_p = points;
+  console.log(points);
+//generate 60k random points
+var radius = 0.003;
+var hexbin = d3.hexbin()
+    .size([
+    	d3.max(points,function(v){return v[0]})-d3.min(points,function(v){return v[0]}), 
+    	d3.max(points,function(v){return v[1]})-d3.min(points,function(v){return v[1]})])
+    .radius(radius);
+
+//create a hexbin
+
+var hex = hexbin(points);
+console.log(hex);
+//populate it
+
+//d3.mean(h, function(h) { return h[2]; })
+var q = d3.scale
+          .quantile()
+          .domain(hex.map(function(h){return d3.mean(h, function(h) { return h[2];})}).reduce(function(a,b){if(a.indexOf(b)===-1){a.push(b)};return a;},[]).sort(function(a,b){return a-b}))
+          .range(d3.range(buckets))
+
+//make a scale
+
+function hexagon(radius) {
+    var x0 = 0, y0 = 0;
+    return d3.range(0, 2 * Math.PI, Math.PI / 3).map(function(angle) {
+      var x1 = Math.sin(angle) * radius,
+          y1 = -Math.cos(angle) * radius,
+          dx = x1 - x0,
+          dy = y1 - y0;
+      x0 = x1, y0 = y1;
+      return [dx, dy];
+    });
+};
+
+console.log(hexagon(10));
+//from the hexbin file, we need this to create points
+
+var transform = hexagon(radius);
+
+//use it to create a transform function
+ transform.shift();
+ 
+//remove the first value as it's a duplicate
+console.log(transform);
+
+L.layerGroup(hex.map(function(h){//create a layergroup
+	return L.polygon(transform.map(function(t){//filled with polygons
+		return [h.x+t[0],h.y+t[1]];//that are the hexagons we need
+	}),{//styled like so
+		stroke:false,
+		color:colorbrewer.RdYlBu[buckets][(buckets-1)-q(d3.mean(h, function(h) { return h[2]; }))],//including color brewer colors
+		fillOpacity:0.7
+	}).bindPopup("number: "+d3.mean(h, function(h) { return h[2]; }));//with the number of points in the popup
+})).addTo(m);
+});
+</script>

@@ -5,11 +5,18 @@ text {
 }
 
 #map {
-	width: 1200px;
-	height: 900px;
+	width: 500px;
+	height: 500px;
 }
 
-.hexagon {
-  stroke: #000;
-  stroke-width: 0.5px;
+path {
+  fill: #000;
+  fill-opacity: .2;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+path:hover {
+  fill: yellow;
+  fill-opacity: .7;
 }

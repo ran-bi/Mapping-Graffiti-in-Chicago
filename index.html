@@ -1,87 +1,76 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=1024, user-scalable=no">
-    <style>
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0;}
-      #map{ height: 100% }
-    </style>
-<link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
-<title>Mapping Graffiti in Chicago</title>
- 
-<div id="map"></div>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="colorbrewer.js"></script>
-<script src="hexbin.js"></script>
-<script src="https://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
-<script>
-var m = L.map("map").setView([41.838299, -87.706953],11);
-var buckets = 11;
-//make the map
-var _p;
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapping Graffiti in Chicago v2</title>
+  
+<!--   <script type="text/javascript" src="./d3/d3.min.js"></script> -->
 
-L.layerGroup([
-    L.tileLayer("http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg",{minZoom:4,maxZoom:18}),
-  L.tileLayer("http://{s}.tile.stamen.com/terrain-lines/{z}/{x}/{y}.png",{minZoom:4,maxZoom:18,attribution:'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})
-  ]).addTo(m);
-	
-//add a tileset	
-//boston police bloter
-d3.json("data/2016_full.json",function(err,points){
-	_p = points;
-  console.log(points);
-//generate 60k random points
-var radius = 0.005;
-var hexbin = d3.hexbin()
-    .size([
-    	d3.max(points,function(v){return v[0]})-d3.min(points,function(v){return v[0]}), 
-    	d3.max(points,function(v){return v[1]})-d3.min(points,function(v){return v[1]})])
-    .radius(radius);
+  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
 
-//create a hexbin
+</head>
+<body>
 
-var hex = hexbin(points);
-console.log(hex);
-//populate it
+	<div id="map" height=180 width=180></div>
 
-//d3.mean(h, function(h) { return h[2]; })
-var q = d3.scale
-          .quantile()
-          .domain(hex.map(function(h){return d3.mean(h, function(h) { return h[2];})}).reduce(function(a,b){if(a.indexOf(b)===-1){a.push(b)};return a;},[]).sort(function(a,b){return a-b}))
-          .range(d3.range(buckets))
+  <script>
+    // Create base map
+    var center = [41.838299, -87.706953],
+        zoom = 11,
+        map = L.map('map').setView(center, zoom);
 
-//make a scale
+    // Create tile layer
+    var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+        mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
+        mapLayer = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map);
 
-function hexagon(radius) {
-    var x0 = 0, y0 = 0;
-    return d3.range(0, 2 * Math.PI, Math.PI / 3).map(function(angle) {
-      var x1 = Math.sin(angle) * radius,
-          y1 = -Math.cos(angle) * radius,
-          dx = x1 - x0,
-          dy = y1 - y0;
-      x0 = x1, y0 = y1;
-      return [dx, dy];
-    });
-};
+    // Create svg layer
+    var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+        g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
-//from the hexbin file, we need this to create points
+    d3.json("data/Boundaries.geojson", function(error, collection) {
+      if (error) throw error;
+      // code here
 
-var transform = hexagon(radius);
+      var transform = d3.geoTransform({point: projectPoint}),
+          path = d3.geoPath().projection(transform);
+      
+      var featureElement = g.selectAll("path")
+                    .data(collection.features)
+                    .enter().append("path");
 
-//use it to create a transform function
- transform.shift();
- 
-//remove the first value as it's a duplicate
+      map.on("moveend", update);
+      update();
 
-L.layerGroup(hex.map(function(h){//create a layergroup
-	return L.polygon(transform.map(function(t){//filled with polygons
-		return [h.x+t[0],h.y+t[1]];//that are the hexagons we need
-	}),{//styled like so
-		stroke:false,
-		color:colorbrewer.RdYlBu[buckets][(buckets-1)-q(d3.mean(h, function(h) { return h[2]; }))],//including color brewer colors
-		fillOpacity:0.7
-	}).bindPopup("number: "+d3.mean(h, function(h) { return h[2]; }));//with the number of points in the popup
-})).addTo(m);
-});
-</script>
+      function update(){
+
+        var bounds = path.bounds(collection),
+            topLeft = bounds[0],
+            bottomRight = bounds[1];
+
+        svg.attr("width", bottomRight[0] - topLeft[0])
+          .attr("height", bottomRight[1] - topLeft[1])
+          .style("left", topLeft[0] + "px")
+          .style("top", topLeft[1] + "px");
+        
+        g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+        featureElement.attr("d", path);
+      }
+
+      function projectPoint(x, y) {
+        var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+        this.stream.point(point.x, point.y);
+      }
+    })
+
+
+
+  </script>
+
+  <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
+
+</body>
+</html>
