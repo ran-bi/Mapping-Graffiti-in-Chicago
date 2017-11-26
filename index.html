@@ -31,16 +31,38 @@
     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
         g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
-    d3.json("data/Boundaries.geojson", function(error, collection) {
+    var colorScale = d3.scaleThreshold()
+                          .domain([2, 6])
+                          .range(["#74add1","#fdae61","#a50026"]);
+    var opacityScale = d3.scaleThreshold()
+                          .domain([100, 500])
+                          .range([0.2,0.6,1]);
+    
+    d3.queue()
+      .defer(d3.json, "data/Boundaries.geojson")
+      .defer(d3.json, "data/summary2014.json")
+      .await(ready)
+    
+    function ready(error, collection, summary) {
       if (error) throw error;
-      // code here
 
       var transform = d3.geoTransform({point: projectPoint}),
           path = d3.geoPath().projection(transform);
       
+      console.log(summary[1])
       var featureElement = g.selectAll("path")
                     .data(collection.features)
-                    .enter().append("path");
+                    .enter().append("path")
+                    .attr("fill", function (d) {
+                      var community_id = d.properties.area_numbe,
+                          response = summary[community_id - 1]["response"];
+                      return colorScale(response);
+                    })
+                    .attr("fill-opacity", function(d){
+                      var community_id = d.properties.area_numbe,
+                          frequency = summary[community_id - 1]["requests_per_10000"];
+                      return opacityScale(frequency)
+                    });
 
       map.on("moveend", update);
       update();
@@ -64,7 +86,7 @@
         var point = map.latLngToLayerPoint(new L.LatLng(y, x));
         this.stream.point(point.x, point.y);
       }
-    })
+    }
 
 
 

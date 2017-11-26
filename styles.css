@@ -10,13 +10,10 @@ text {
 }
 
 path {
-  fill: #000;
-  fill-opacity: .2;
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
 path:hover {
-  fill: yellow;
-  fill-opacity: .7;
+	fill: yellow;
 }
