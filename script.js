@@ -37,14 +37,16 @@ var colorScale = d3.scaleThreshold()
 var opacityScale = d3.scaleThreshold()
                       .domain([100, 500])
                       .range([0.2,0.6,1]);
-var collection;
-var summaries;
+var collection,
+    summaries,
+    communityName;
 
 function ready(error, results){
   if (error) throw error;
   collection = results[0];    // Boundaries
   summaries = results.slice(1,6);  // Summary by year
   initializeColor(collection, summaries[0]);
+  initializeName(summaries[0]);
 }
   
 
@@ -60,6 +62,7 @@ function initializeColor(collection, summary){
                 .on("click", function(d){
                   d3.select(this).style("stroke", "black");
                   updateFrequencyLine(d.properties.area_numbe, frequencyData);
+                  updateName(d.properties.area_numbe, summary)
                 })
 
   map.on("moveend", updatePosition);
@@ -86,4 +89,20 @@ function updateColor(value) {
       d3.select(this).style("stroke", "black");
       updateFrequencyLine(d.properties.area_numbe, frequencyData);
     })
+}
+
+function initializeName(summary){
+  communityName = d3.select("#info").append("g")
+    .selectAll("name")
+    .data([summary[0]["name"]]).enter()
+    .append("text")
+    .text(function(d) {return d;})
+    .attr("class", "name")
+    .attr("font-size", "12px");
+}
+
+function updateName(area_number, summary){
+  communityName.text(summary[area_number-1]["name"])
+    .transition()
+    .duration(1000);
 }

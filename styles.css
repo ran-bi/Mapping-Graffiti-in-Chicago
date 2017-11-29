@@ -3,6 +3,7 @@
     stroke-width: 1px;
 }
 
+
 text {
 	font-family: Prociono;
 }
@@ -15,6 +16,7 @@ text {
 .leaflet-overlay-pane svg path{
     pointer-events: auto;
 }
+
 path {
   stroke: #fff;
   stroke-width: 1 px;
@@ -22,6 +24,11 @@ path {
 
 path:hover {
     fill: yellow;
+}
+
+#info{
+    width: 500px;
+    height: 50px;
 }
 
 #comparison{
