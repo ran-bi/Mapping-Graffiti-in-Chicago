@@ -12,13 +12,35 @@ text {
 	height: 500px;
 }
 
+.leaflet-overlay-pane svg path{
+    pointer-events: auto;
+}
 path {
   stroke: #fff;
-  stroke-width: 0.5 px;
+  stroke-width: 1 px;
 }
 
 path:hover {
     fill: yellow;
+}
+
+#comparison{
+    width: 500px;
+    height: 500px;
+    background: yellow;
+}
+
+.frequencyLine {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+
+.averageFrequencyLine {  
+  fill: none;
+  stroke: red;
+  stroke-width: 2px;
 }
 
 /* Add a black background color to the top navigation */
