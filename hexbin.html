@@ -6,15 +6,12 @@
   
 <!--   <script type="text/javascript" src="./d3/d3.min.js"></script> -->
   
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
 
   <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
   <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+
   <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
   <link rel="stylesheet" type="text/css" href="styles.css"/>
 
@@ -31,110 +28,7 @@
   </div>
 
 	<div id="map"></div>
-
-  <script>
-    var center = [41.838299, -87.706953],
-        zoom = 11,
-        map = L.map('map').setView(center, zoom);
-
-    var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
-        mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
-        mapLayer = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map);
-
-
-    var options = {
-      radius : 14,
-      opacity: 0.8,
-      colorScaleExtent: [1, 500],
-      colorRange: ['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']
-    };
-
-    var hexLayer = L.hexbinLayer(options).addTo(map)
-
-    var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-        g = svg.append("g").attr("class", "leaflet-zoom-hide");
-
-
-
-    hexLayer
-      .lat(function(d) { return d[0]; })
-      .lng(function(d) { return d[1]; })
-      .colorValue(function(d) { return d.length; });
-
-    d3.queue()
-      .defer(d3.json, "data/Boundaries.geojson")
-      .defer(d3.json, "data/2012.json")
-      .defer(d3.json, "data/2013.json")
-      .defer(d3.json, "data/2014.json")
-      .defer(d3.json, "data/2015.json")
-      .defer(d3.json, "data/2016.json")
-      .awaitAll(ready)
-    
-    var collection;
-    var locations;
-    
-    function ready(error, results){
-      if (error) throw error;
-
-      collection = results[0];
-      locations = results.slice(1,6);
-      initializeHex(collection, locations[0]);
-    }
-      
-    d3.select("#timeslide").on("input", function() {
-        updateHex(+this.value);
-    });
-
-
-    function initializeHex(collection, location){
-      hexLayer.data(location);
-      console.log(hexLayer.data(location));
-
-      var transform = d3.geoTransform({point: projectPoint}),
-          path = d3.geoPath().projection(transform);
-      
-      var featureElement = g.selectAll("path")
-                    .data(collection.features)
-                    .enter().append("path")
-                    .attr("fill", "white")
-                    .attr("fill-opacity", 0.3)
-                    .attr("stroke", "black");
-
-      map.on("moveend", updatePosition);
-      updatePosition();
-
-      function updatePosition(){
-
-        var bounds = path.bounds(collection),
-            topLeft = bounds[0],
-            bottomRight = bounds[1];
-
-        svg.attr("width", bottomRight[0] - topLeft[0])
-          .attr("height", bottomRight[1] - topLeft[1])
-          .style("left", topLeft[0] + "px")
-          .style("top", topLeft[1] + "px");
-        
-        g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
-        featureElement.attr("d", path);
-        
-      }
-
-      function projectPoint(x, y) {
-        var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-        this.stream.point(point.x, point.y);
-      }
-      
-    }
-
-    function updateHex(value) {
-      var year = [2012, 2013, 2014, 2015, 2016];
-      document.getElementById("range").innerHTML = year[value];
-      hexLayer.data(locations[value]);
-    }
-
-
-  </script>
-
+  <script type="text/javascript" src="hexbin.js"></script>
   <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
 
 </body>
