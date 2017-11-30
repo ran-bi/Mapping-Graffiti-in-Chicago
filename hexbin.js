@@ -17,8 +17,8 @@ function createMap(){
   var center = [41.838299, -87.706953],
       zoom = 11;
   map = L.map('map').setView(center, zoom);
-  var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
-      mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
+  var mapUrl = 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
+      mapAttrib = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
       mapLayer = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map);
 }
 
@@ -33,7 +33,7 @@ function ready(error, results){
 
 function initializeHex(collection, location){
   var options = {
-    radius : 14,
+    radius : 12,
     opacity: 0.8,
     colorScaleExtent: [1, 500],
     colorRange: ['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#f03b20', '#bd0026']
@@ -56,7 +56,7 @@ function initializeHex(collection, location){
                 .enter().append("path")
                 .attr("fill", "white")
                 .attr("fill-opacity", 0)
-                .style("stroke", "steelblue")
+                .style("stroke", "#d2d2d2")
                 .on("click", function(d){
                   d3.select(this).style("stroke", "black");
                 });

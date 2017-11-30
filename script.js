@@ -18,9 +18,10 @@ function createMap(){
   var center = [41.838299, -87.706953],
       zoom = 11;
   map = L.map('map').setView(center, zoom);
+
   // Create tile layer
-  var mapUrl = 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
-      mapAttrib = '<a id="home-link" target="_top" href="../">Map tiles</a> by <a target="_top" href="http://stamen.com">Stamen Design</a>, under <a target="_top" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>',   
+  var mapUrl = 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
+      mapAttrib = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
       mapLayer = L.tileLayer(mapUrl, {attribution: mapAttrib}).addTo(map);
   // Create svg layer
   L.svg({clickable:true}).addTo(map);
@@ -32,11 +33,18 @@ var svg = d3.select("#map").select("svg")
 
 var colorScale = d3.scaleThreshold()
                       .domain([3, 6])
-                      .range(["#74add1","#fdae61","#a50026"]);
+//                      .range(["#1696d2", "#fdbf11"," #db2b27"]);
+                      .range(["#1696d2", "#fdbf11","#ec008b"]);
+//                      .range(["#1696d2", "#55b748", "#fdbf11"]);
+//                      .range(['#fc8d59','#ffffbf','#91bfdb'])
+//                      .range(["#74add1","#fdae61","#a50026"]);
+//                      .range(["#92c5de", "#ca0020", "#f4a582"]);
+//                      .range(["#bebada","#ffffb3","#8dd3c7"])
+//                     .range(["#ccebc5", "#b3cde3", "#fbb4ae"])
 
 var opacityScale = d3.scaleThreshold()
                       .domain([100, 500])
-                      .range([0.2,0.6,1]);
+                      .range([0.3,0.6, 1]);
 var collection,
     summaries,
     communityName;
@@ -60,10 +68,14 @@ function initializeColor(collection, summary){
                 .attr("fill", function (d){ return colorScale(summary[d.properties.area_numbe - 1]["response"]);})
                 .attr("fill-opacity", function(d){ return opacityScale(summary[d.properties.area_numbe - 1]["requests_per_10000"]);})
                 .on("click", function(d){
-                  d3.select(this).style("stroke", "black");
                   updateFrequencyLine(d.properties.area_numbe, frequencyData);
+                  updateResponseLine(d.properties.area_numbe, responseData);
+                  updateName(d.properties.area_numbe, summary);
+                })
+                .on("mousemove", function(d){
                   updateName(d.properties.area_numbe, summary)
                 })
+
 
   map.on("moveend", updatePosition);
   updatePosition();
@@ -86,8 +98,12 @@ function updateColor(value) {
     .attr("fill", function (d) { return colorScale(summary[d.properties.area_numbe - 1]["response"]);})
     .attr("fill-opacity", function(d){ return opacityScale(summary[d.properties.area_numbe - 1]["requests_per_10000"]);})
     .on("click", function(d){
-      d3.select(this).style("stroke", "black");
       updateFrequencyLine(d.properties.area_numbe, frequencyData);
+      updateResponseLine(d.properties.area_numbe, responseData);
+      updateName(d.properties.area_numbe, summary);
+    })
+    .on("mousemove", function(d){
+      updateName(d.properties.area_numbe, summary)
     })
 }
 
@@ -98,7 +114,7 @@ function initializeName(summary){
     .append("text")
     .text(function(d) {return d;})
     .attr("class", "name")
-    .attr("font-size", "12px");
+    .style("font-size", "30px");
 }
 
 function updateName(area_number, summary){

@@ -17,19 +17,27 @@
 
 </head>
 <body>
-  <div class="topnav" id="myTopnav">
-    <a href="index.html">Bivariate Map </a>
-    <a class="active" href="h#">Hexbin Map</a>
+  <div class="container">
+    <div class="topnav" id="myTopnav">
+      <ul id="nav">
+        <h1>Mapping Graffiti in Chicago</h1>
+        <li><a href="index.html">Bivariate Map </a></li> 
+        <li><a class="active" href="#">Hexbin Map</a></li>     
+    </div>
+
+    <div id="graphs"; position:relative; width = "100%"; height = "800px">
+
+      <div id="sliderContainer">
+        <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
+        <span id="range">2012</span>
+      </div>
+      <div id="map"></div>
+    </div>
   </div>
 
-  <div id="sliderContainer">
-  <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
-  <span id="range">2012</span>
-  </div>
-
-	<div id="map"></div>
   <script type="text/javascript" src="hexbin.js"></script>
-  <p>Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
+
+  <p style="float:left">Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
 
 </body>
 </html>
