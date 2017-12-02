@@ -16,7 +16,7 @@ d3.select("#timeslide").on("input", function() {
 function createMap(){
   // Define map parameters
   var center = [41.838299, -87.706953],
-      zoom = 11;
+      zoom = 10.5;
   map = L.map('map').setView(center, zoom);
 
   // Create tile layer

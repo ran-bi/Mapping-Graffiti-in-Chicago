@@ -1,51 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Mapping Graffiti in Chicago v2</title>
-  
-<!--   <script type="text/javascript" src="./d3/d3.min.js"></script> -->
+  <head>
+    <title>Mapping Graffiti in Chicago v3</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
-  <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <!-- Import Bootstrap/Leaflet/My own CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
 
-</head>
-<body>
+    <!-- Import JavaScript -->
+    <!-- Bootstrap, jQuery, D3, Leaflet -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
 
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Mapping Graffiti in Chicago</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="container">
-    <div class="topnav" id="myTopnav">
-      <ul id="nav">
-        <h1>Mapping Graffiti in Chicago</h1>
-        <li><a class="active" href="#">Bivariate Map </a></li> 
-        <li><a href="hexbin.html">Hexbin Map</a></li>     
-    </div>
-
-    <div id="graphs"; position:relative; width = "100%"; height = "800px">
-
-      <div id="sliderContainer">
-        <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
-        <span id="range">2012</span>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Bivariate Map <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="hexbin.html">Hexbin Map</a>
+          </li>
+        </ul>
       </div>
-      <div id="map"></div>
+    </nav>
 
-      <div id="comparison">
-        <div id="info"></div>
-        <h3>Average Requests per 10,000 Population</h2>
-        <div id="frequency"></div>
-        <h3>Average Response Time</h2>
-        <div id="response"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="sliderContainer">
+            <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
+            <span id="range">2012</span>
+          </div>
+          <div id="map"></div>
+        </div>
+        <div class="col-md-6">
+          <div id="info"></div>
+          <div class="row">
+            <div class="col-md-6" id="frequency"></div>
+            <div class="col-md-6" id="response"></div>            
+          </div>
+          <p>Average Requests per 10,000 Population</p>
+          <p>Average Response Time</p>
+        </div>
       </div>
-    </div>
+    </div>    
+    
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="comparison.js"></script>
 
-  </div>
-
-  <script type="text/javascript" src="script.js"></script>
-  <script type="text/javascript" src="comparison.js"></script>
-  
-  <p style="float:left">Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
-
-</body>
+  </body>
 </html>

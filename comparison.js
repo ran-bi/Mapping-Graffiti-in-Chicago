@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
+var margin = {top: 20, right: 20, bottom: 20, left: 50},
     width = 300 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -138,7 +138,7 @@ function initializeResponseLine(data){
     .call(xAxis);
 
   g2.append("g")
-    .attr("class", "y.axis")
+    .attr("class", "y.axis.1")
     .call(yAxisResponse);
 }
 
@@ -152,7 +152,7 @@ function updateResponseLine(area_number, summary = responseData) {
   
 
   // Scale the range of the data
-  yScaleResponse.domain([0, d3.max(data, function(d) { return d3.max(d,function(c) {return c.time})})]);
+//  yScaleResponse.domain([0, d3.max(data, function(d) { return d3.max(d,function(c) {return c.time})})]);
 
   // Add the valueline path.
   g2.selectAll(".averageResponseLine")
@@ -169,11 +169,12 @@ function updateResponseLine(area_number, summary = responseData) {
     .transition()
     .duration(1000)
     .attr("d", function(d){return responseLine(d);});
-  console.log(data[1])
-
+}
+/*
   // Update the Y Axis
-  g2.select(".y.axis")
+  g2.select(".y.axis.1")
     .transition()
     .duration(1000)
     .call(yAxisResponse);
   }
+  */
