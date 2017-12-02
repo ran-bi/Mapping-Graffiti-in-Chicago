@@ -12,8 +12,9 @@ text {
     font-family: Prociono;
 }
 
-h3 {
+h5 {
     font-family: Prociono;
+    text-align: center;
 }
 
 #map {
@@ -48,6 +49,7 @@ path {
   fill: none;
   stroke: red;
   stroke-width: 2px;
+  stroke-dasharray: 4,4;
 }
 
 .responseLine {
@@ -61,13 +63,13 @@ path {
   fill: none;
   stroke: red;
   stroke-width: 2px;
+  stroke-dasharray: 4,4;
 }
-
 
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
-    width: 100%; /* Full-width */
+    width: 80%; /* Full-width */
     height: 25px; /* Specified height */
     background: #F5F5F5; /* Grey background */
     outline: none; /* Remove outline */

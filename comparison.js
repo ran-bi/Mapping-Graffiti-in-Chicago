@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 20, bottom: 20, left: 50},
+var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 300 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -64,7 +64,7 @@ function initializeFrequencyLine(data){
     .attr("d", function(d){return frequencyLine(d);});
 
   g1.append("g")
-    .attr("class", "x axis frequency")
+    .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
 
@@ -74,7 +74,6 @@ function initializeFrequencyLine(data){
 }
 
 function updateFrequencyLine(area_number, summary = frequencyData) {
-  console.log(area_number)
   data = [];
   average = summary[77]["frequency"];
   individual_community = summary[area_number]["frequency"];
@@ -100,7 +99,7 @@ function updateFrequencyLine(area_number, summary = frequencyData) {
     .attr("d", function(d){return frequencyLine(d);});
 
   // Update the Y Axis
-  g1.select(".y.axis")
+  g1.select(".y.axis.frequency")
     .transition()
     .duration(1000)
     .call(yAxisFrequency);
@@ -133,12 +132,12 @@ function initializeResponseLine(data){
     .attr("d", function(d){return responseLine(d);});
 
   g2.append("g")
-    .attr("class", "x.axis")
+    .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
 
   g2.append("g")
-    .attr("class", "y.axis.1")
+    .attr("class", "y axis response")
     .call(yAxisResponse);
 }
 
@@ -152,8 +151,8 @@ function updateResponseLine(area_number, summary = responseData) {
   
 
   // Scale the range of the data
-//  yScaleResponse.domain([0, d3.max(data, function(d) { return d3.max(d,function(c) {return c.time})})]);
-
+  yScaleResponse.domain([0, d3.max(data, function(d) { return d3.max(d,function(c) {return c.time})})]);
+  console.log(yScaleResponse.domain())
   // Add the valueline path.
   g2.selectAll(".averageResponseLine")
     .data([data[0]])
@@ -161,20 +160,17 @@ function updateResponseLine(area_number, summary = responseData) {
     .duration(1000)
     .attr("d", function(d){return responseLine(d);});
 
-  console.log(data[0])
-  console.log(yScaleResponse.domain())
-
   g2.selectAll(".responseLine")
     .data([data[1]])
     .transition()
     .duration(1000)
     .attr("d", function(d){return responseLine(d);});
-}
-/*
+
+
   // Update the Y Axis
-  g2.select(".y.axis.1")
+  g2.selectAll(".y.axis.response")
     .transition()
     .duration(1000)
     .call(yAxisResponse);
-  }
-  */
+}
+  
