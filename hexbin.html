@@ -1,43 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Mapping Graffiti in Chicago</title>
-  
-<!--   <script type="text/javascript" src="./d3/d3.min.js"></script> -->
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+  <head>
+    <title>Mapping Graffiti in Chicago v3</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-  <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <!-- Import Bootstrap/Leaflet/My own CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
 
-  <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
-  <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <!-- Import JavaScript -->
+    <!-- Bootstrap, jQuery, D3, Leaflet -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
 
-</head>
-<body>
-  <div class="container">
-    <div class="topnav" id="myTopnav">
-      <ul id="nav">
-        <h1>Mapping Graffiti in Chicago</h1>
-        <li><a href="index.html">Bivariate Map </a></li> 
-        <li><a class="active" href="#">Hexbin Map</a></li>     
-    </div>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Mapping Graffiti in Chicago</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div id="graphs"; position:relative; width = "100%"; height = "800px">
-
-      <div id="sliderContainer">
-        <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>
-        <span id="range">2012</span>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Bivariate Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hexbin Map<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
       </div>
-      <div id="map"></div>
-    </div>
-  </div>
+    </nav>
 
-  <script type="text/javascript" src="hexbin.js"></script>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="sliderContainer">
+            <span id="range">2012</span>
+            <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/><br>            
+          </div>
+          <div id="map"></div>
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      <p style="float:left">Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
+    </div>    
+    
+    <script type="text/javascript" src="hexbin.js"></script>
 
-  <p style="float:left">Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
-
-</body>
+  </body>
 </html>

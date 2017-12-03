@@ -4,15 +4,15 @@ var colorCode =
 						"#ec008b":{"0.3": "HL", "0.6": "HM", "1": "HH"}}
 
 var legendSvg = d3.select("#legend").append("svg").attr("transform", "translate(80,0)").attr("width", 500);
-legendSvg.append("rect").attr("x",0).attr("y",0).attr("height", 30).attr("width",90).style("fill","#1696d2").style("fill-opacity", 0.3).style("stroke","black").attr("stroke-opacity",0).attr("id", "LL");
-legendSvg.append("rect").attr("x",90).attr("y",0).attr("height", 30).attr("width",90).style("fill","#1696d2").style("fill-opacity", 0.6).style("stroke","black").attr("stroke-opacity",0).attr("id", "LM");
-legendSvg.append("rect").attr("x",180).attr("y",0).attr("height", 30).attr("width",90).style("fill","#1696d2").style("fill-opacity", 1).style("stroke","black").attr("stroke-opacity",0).attr("id", "LH");
-legendSvg.append("rect").attr("x",0).attr("y",40).attr("height", 30).attr("width",90).style("fill","#fdbf11").style("fill-opacity", 0.3).style("stroke","black").attr("stroke-opacity",0).attr("id", "ML");
-legendSvg.append("rect").attr("x",90).attr("y",40).attr("height", 30).attr("width",90).style("fill","#fdbf11").style("fill-opacity", 0.6).style("stroke","black").attr("stroke-opacity",0).attr("id", "MM");
-legendSvg.append("rect").attr("x",180).attr("y",40).attr("height", 30).attr("width",90).style("fill","#fdbf11").style("fill-opacity", 1).style("stroke","black").attr("stroke-opacity",0).attr("id", "MH");
-legendSvg.append("rect").attr("x",0).attr("y",80).attr("height", 30).attr("width",90).style("fill","#ec008b").style("fill-opacity", 0.3).style("stroke","black").attr("stroke-opacity",0).attr("id", "HL");
-legendSvg.append("rect").attr("x",90).attr("y",80).attr("height", 30).attr("width",90).style("fill","#ec008b").style("fill-opacity", 0.6).style("stroke","black").attr("stroke-opacity",0).attr("id", "HM");
-legendSvg.append("rect").attr("x",180).attr("y",80).attr("height", 30).attr("width",90).style("fill","#ec008b").style("fill-opacity", 1).style("stroke","black").attr("stroke-opacity",0).attr("id", "HH");
+legendSvg.append("rect").attr("x",0).attr("y",0).attr("height", 30).attr("width",90).style("fill","#1696d2").style("fill-opacity", 0.3).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "LL");
+legendSvg.append("rect").attr("x",90).attr("y",0).attr("height", 30).attr("width",90).style("fill","#1696d2").style("fill-opacity", 0.6).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "LM");
+legendSvg.append("rect").attr("x",180).attr("y",0).attr("height", 30).attr("width",90).style("fill","#1696d2").style("fill-opacity", 1).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "LH");
+legendSvg.append("rect").attr("x",0).attr("y",40).attr("height", 30).attr("width",90).style("fill","#fdbf11").style("fill-opacity", 0.3).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "ML");
+legendSvg.append("rect").attr("x",90).attr("y",40).attr("height", 30).attr("width",90).style("fill","#fdbf11").style("fill-opacity", 0.6).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "MM");
+legendSvg.append("rect").attr("x",180).attr("y",40).attr("height", 30).attr("width",90).style("fill","#fdbf11").style("fill-opacity", 1).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "MH");
+legendSvg.append("rect").attr("x",0).attr("y",80).attr("height", 30).attr("width",90).style("fill","#ec008b").style("fill-opacity", 0.3).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "HL");
+legendSvg.append("rect").attr("x",90).attr("y",80).attr("height", 30).attr("width",90).style("fill","#ec008b").style("fill-opacity", 0.6).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "HM");
+legendSvg.append("rect").attr("x",180).attr("y",80).attr("height", 30).attr("width",90).style("fill","#ec008b").style("fill-opacity", 1).style("stroke","black").attr("stroke-opacity",0).attr("stroke-width",2).attr("id", "HH");
 
 legendSvg.append("text").attr("x",280).attr("y",20).style("font-size", "16px").text("Response within 3 days");
 legendSvg.append("text").attr("x",280).attr("y",60).style("font-size", "16px").text("Response within 6 days");
