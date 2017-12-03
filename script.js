@@ -31,16 +31,17 @@ var svg = d3.select("#map").select("svg")
             .attr("pointer-events", "auto"),
     g = svg.select("g");
 
+var colorPalette = ["#1696d2", "#fdbf11","#ec008b"];
 var colorScale = d3.scaleThreshold()
                       .domain([3, 6])
-//                      .range(["#1696d2", "#fdbf11"," #db2b27"]);
-                      .range(["#1696d2", "#fdbf11","#ec008b"]);
+                      .range(colorPalette);
 //                      .range(["#1696d2", "#55b748", "#fdbf11"]);
 //                      .range(['#fc8d59','#ffffbf','#91bfdb'])
 //                      .range(["#74add1","#fdae61","#a50026"]);
 //                      .range(["#92c5de", "#ca0020", "#f4a582"]);
 //                      .range(["#bebada","#ffffb3","#8dd3c7"])
 //                     .range(["#ccebc5", "#b3cde3", "#fbb4ae"])
+//                      .range(["#1696d2", "#fdbf11"," #db2b27"]);
 
 var opacityScale = d3.scaleThreshold()
                       .domain([100, 500])
@@ -74,6 +75,14 @@ function initializeColor(collection, summary){
                 })
                 .on("mousemove", function(d){
                   updateName(d.properties.area_numbe, summary)
+                  color = colorScale(summary[d.properties.area_numbe - 1]["response"]);
+                  opacity = opacityScale(summary[d.properties.area_numbe - 1]["requests_per_10000"]);
+                  highlightLegend(color, opacity);
+                })
+                .on("mouseout", function(d){
+                  color = colorScale(summary[d.properties.area_numbe - 1]["response"]);
+                  opacity = opacityScale(summary[d.properties.area_numbe - 1]["requests_per_10000"]);
+                  unHighlightLegend(color, opacity);
                 })
 
 
@@ -103,8 +112,26 @@ function updateColor(value) {
       updateName(d.properties.area_numbe, summary);
     })
     .on("mousemove", function(d){
-      updateName(d.properties.area_numbe, summary)
+      color = colorScale(summary[d.properties.area_numbe - 1]["response"]);
+      opacity = opacityScale(summary[d.properties.area_numbe - 1]["requests_per_10000"]);
+      highlightLegend(color, opacity);
+      updateName(d.properties.area_numbe, summary);
     })
+    .on("mouseout", function(d){
+      color = colorScale(summary[d.properties.area_numbe - 1]["response"]);
+      opacity = opacityScale(summary[d.properties.area_numbe - 1]["requests_per_10000"]);
+      unHighlightLegend(color, opacity);
+    })
+}
+
+function highlightLegend(color, opacity){
+  id = colorCode[color][opacity];
+  d3.select("#" + id).style("stroke-opacity",1);
+}
+
+function unHighlightLegend(color, opacity){
+  id = colorCode[color][opacity];
+  d3.select("#" + id).style("stroke-opacity",0);
 }
 
 function initializeName(summary){

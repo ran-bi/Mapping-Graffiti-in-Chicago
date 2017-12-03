@@ -22,6 +22,10 @@ h5 {
     height: 600px;
 }
 
+#legend {
+    height: 200px;
+}
+
 .leaflet-overlay-pane svg path{
     pointer-events: auto;
 }
