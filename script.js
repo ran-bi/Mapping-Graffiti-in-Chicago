@@ -45,7 +45,7 @@ var colorScale = d3.scaleThreshold()
 
 var opacityScale = d3.scaleThreshold()
                       .domain([100, 500])
-                      .range([0.3,0.6, 1]);
+                      .range([0.3,0.6, 0.9]);
 var collection,
     summaries,
     communityName;
