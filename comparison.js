@@ -10,7 +10,7 @@ var g1 = svg1.append("g").attr("transform", "translate(" + margin.left + "," + m
 
 // Response line
 var svg2 = d3.select("#response").append("svg")
-            .attr("width", width + margin.left + margin.right)
+            .attr("width", width + margin.left + margin.right + 100)
             .attr("height", height + margin.top + margin.bottom);
 var g2 = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -173,4 +173,7 @@ function updateResponseLine(area_number, summary = responseData) {
     .duration(1000)
     .call(yAxisResponse);
 }
+
+// Add x axis lable
+svg2.append("text").attr("x",300).attr("y",290).text("Year");
   

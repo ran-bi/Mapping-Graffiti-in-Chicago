@@ -48,28 +48,28 @@ path {
 
 .frequencyLine {
   fill: none;
-  stroke: black;
+  stroke: red;
   stroke-width: 2px;
 }
 
 
 .averageFrequencyLine {  
   fill: none;
-  stroke: red;
+  stroke: #5c5859;
   stroke-width: 2px;
   stroke-dasharray: 4,4;
 }
 
 .responseLine {
   fill: none;
-  stroke: black;
+  stroke: red;
   stroke-width: 2px;
 }
 
 
 .averageResponseLine {  
   fill: none;
-  stroke: red;
+  stroke: #5c5859;
   stroke-width: 2px;
   stroke-dasharray: 4,4;
 }
