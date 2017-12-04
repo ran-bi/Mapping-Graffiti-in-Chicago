@@ -35,6 +35,10 @@ path {
   stroke-width: 2px;
 }
 
+.axis path {
+  stroke: #000;
+  stroke-width: 1px;
+}
 
 #info{
     width: 500px;
