@@ -78,7 +78,7 @@ path {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     width: 60%; /* Full-width */
-    height: 30px; /* Specified height */
+    height: 25px; /* Specified height */
     background: #D2D2D2; /* Grey background */
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
@@ -95,15 +95,15 @@ path {
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: 30px; /* Set a specific slider handle width */
-    height: 30px; /* Slider handle height */
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
     background: #F55856; 
     cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-    width: 30px; /* Set a specific slider handle width */
-    height: 30px; /* Slider handle height */
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
     background: #F55856; 
     cursor: pointer; /* Cursor on hover */
 }
