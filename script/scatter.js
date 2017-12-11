@@ -68,8 +68,10 @@ function initializePoint(location){
               .data(location.features)
               .enter()
               .append("a")
-              .attr("xlink:href", function(d){return "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint="+d.geometry.coordinates[1]+","+d.geometry.coordinates[0]})
-              .attr("xlink:show", "new")
+                .on("click", function(d){
+                  d3.select(this).attr("xlink:href", function(d){return "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint="+d.geometry.coordinates[1]+","+d.geometry.coordinates[0]})
+                  .attr("xlink:show", "new");
+                })
               .append("circle")
               .attr("class", "circle")
               .style("fill-opacity", 0.8)
