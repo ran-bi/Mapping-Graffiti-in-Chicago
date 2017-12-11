@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Mapping Graffiti in Chicago v3</title>
+    <title>Mapping Graffiti in Chicago</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,21 +9,19 @@
     <!-- Import Bootstrap/Leaflet/My own CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 
     <!-- Import JavaScript -->
     <!-- Bootstrap, jQuery, D3, Leaflet -->
     <script src="js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
-    <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
 
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Mapping Graffiti in Chicago</a>
+      <a class="navbar-brand" href="index.html">Mapping Graffiti in Chicago</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,10 +29,13 @@
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Bivariate Map</a>
+            <a class="nav-link" href="index.html">Introduction</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Hexbin Map<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Community Comparison<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatter.html">Recurring Graffiti</a>
           </li>
         </ul>
       </div>
@@ -45,17 +46,34 @@
         <div class="col-md-6">
           <div id="sliderContainer" align="center">
             <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/>
-            <span id="range" style="font-size: 36px; font-family: Prociono">2012</span>            
+            <span id="range" style="font-size: 36px; font-family: Prociono">2012</span>
           </div>
           <div id="map"></div>
         </div>
         <div class="col-md-6">
+          <div id="info"></div>
+          <div id="legend"></div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Number of Requests<br>per 10,000 Population</h5>
+            </div>
+            <div class="col-md-6">
+              <h5>Average Number of Days<br> to Remove Graffiti</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6" id="frequency"></div>
+            <div class="col-md-6" id="response"></div>            
+          </div>
+          <div id="lineLegend"></div>
         </div>
       </div>
-      <p style="float:left">Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
     </div>    
     
-    <script type="text/javascript" src="hexbin.js"></script>
+    <script type="text/javascript" src="script/bivariate.js"></script>
+    <script type="text/javascript" src="script/comparison.js"></script>
+    <script type="text/javascript" src="script/legend.js"></script>
 
   </body>
 </html>

@@ -23,7 +23,7 @@ var xScale = d3.scaleLinear().domain([2012, 2016]).range([0, width]),
 var yScaleFrequency = d3.scaleLinear().domain([0,600]).range([height, 0]),
     yAxisFrequency = d3.axisLeft(yScaleFrequency).ticks(6);
 
-var yScaleResponse = d3.scaleLinear().domain([0,9]).range([height, 0]),
+var yScaleResponse = d3.scaleLinear().domain([0,10]).range([height, 0]),
     yAxisResponse = d3.axisLeft(yScaleResponse).ticks(6);
  
 // Line generator
@@ -149,10 +149,6 @@ function updateResponseLine(area_number, summary = responseData) {
   data.push(average);
   data.push(individual_community);
   
-
-  // Scale the range of the data
-  yScaleResponse.domain([0, d3.max(data, function(d) { return d3.max(d,function(c) {return c.time})})]);
-  console.log(yScaleResponse.domain())
   // Add the valueline path.
   g2.selectAll(".averageResponseLine")
     .data([data[0]])
@@ -165,13 +161,6 @@ function updateResponseLine(area_number, summary = responseData) {
     .transition()
     .duration(1000)
     .attr("d", function(d){return responseLine(d);});
-
-
-  // Update the Y Axis
-  g2.selectAll(".y.axis.response")
-    .transition()
-    .duration(1000)
-    .call(yAxisResponse);
 }
 
 // Add x axis lable

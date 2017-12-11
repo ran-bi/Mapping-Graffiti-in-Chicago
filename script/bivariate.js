@@ -1,3 +1,4 @@
+//Reference: bl.ocks.org/shimizu/749df041c1945aef78fd992c7dfbe0e1
 var map;
 createMap();
 d3.queue()
@@ -35,13 +36,6 @@ var colorPalette = ["#1696d2", "#fdbf11","#ec008b"];
 var colorScale = d3.scaleThreshold()
                       .domain([3, 6])
                       .range(colorPalette);
-//                      .range(["#1696d2", "#55b748", "#fdbf11"]);
-//                      .range(['#fc8d59','#ffffbf','#91bfdb'])
-//                      .range(["#74add1","#fdae61","#a50026"]);
-//                      .range(["#92c5de", "#ca0020", "#f4a582"]);
-//                      .range(["#bebada","#ffffb3","#8dd3c7"])
-//                     .range(["#ccebc5", "#b3cde3", "#fbb4ae"])
-//                      .range(["#1696d2", "#fdbf11"," #db2b27"]);
 
 var opacityScale = d3.scaleThreshold()
                       .domain([100, 500])

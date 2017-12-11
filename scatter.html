@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Mapping Graffiti in Chicago</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Import Bootstrap/Leaflet/My own CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+
+    <!-- Import JavaScript -->
+    <!-- Bootstrap, jQuery, D3, Leaflet -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="https://rawgit.com/Asymmetrik/leaflet-d3/master/dist/leaflet-d3.js" charset="utf-8"></script>
+
+  </head>
+  <body style="height:800px">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="index.html">Mapping Graffiti in Chicago</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Introduction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="bivariate.html">Community Comparison</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Recurring Graffiti<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="sliderContainer" align="center">
+            <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/>
+            <span id="range" style="font-size: 36px; font-family: Prociono">2012</span>            
+          </div>
+          <p style="text-align: center;font-family: Prociono" class="text-danger">Click on the points to view in Google Street!</p>
+          <div id="map"></div>
+        </div>
+        <div class="col-md-6">
+          <div id="info" style="font-size:30px; font-family: Prociono">Recurring Graffiti</div>
+          <div style= "font-size:16px;font-family: Prociono; text-align: center; height:25px"> Number of Requests Received from a Single Location in One Year</div> 
+          <div id="scatterLegend"></div>
+          <hr>
+          <div  style= "font-size:18px;font-family: Prociono; text-align: center; height:50 px"><mark>Top 100 Locations<span class="super">*</span></mark><br>Getting the Most Recurring Graffiti Incidents in One Year</div>
+          <div  class="text-danger" style= "font-size:16px;font-family: Prociono; text-align: center; font-style: italic">Graffiti are more concentrated and persistent in recent years</div>
+          <div id="beeswarm" style="background-color: grey height:800"></div>
+        </div>
+      </div>
+    </div>    
+    
+    <script type="text/javascript" src="script/scatter.js"></script>
+    <script type="text/javascript" src="script/beeswarm.js"></script>
+    <script type="text/javascript" src="script/legend.js"></script>
+
+  </body>
+</html>

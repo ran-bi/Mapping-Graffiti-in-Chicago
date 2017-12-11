@@ -1,6 +1,33 @@
+path.sparkline {
+  fill: none;
+  stroke: grey;
+  stroke-width: 0.5px;
+}
+
+.sparkcircle {
+  fill: #fdbf11;
+  stroke: none;
+}
+
+.super{
+ vertical-align: super;
+}
+
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: 100px;          
+    height: 40px;         
+    padding: 2px;       
+    font: 10px sans-serif;   
+    font-family: Prociono; 
+    background: lightsteelblue; 
+    border: 0px;    
+    pointer-events: none;     
+}
+
 .hexbin-hexagon {
     stroke: white;
-    stroke-width: 1px;
     fill-opacity:0.8;
 }
 
@@ -18,8 +45,8 @@ h5 {
 }
 
 #map {
-    width: 500px;
-    height: 600px;
+    width: 520px;
+    height: 620px;
 }
 
 #legend {
@@ -74,6 +101,7 @@ path {
   stroke-dasharray: 4,4;
 }
 
+/* Reference: https://www.w3schools.com/howto/howto_js_rangeslider.asp; */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;

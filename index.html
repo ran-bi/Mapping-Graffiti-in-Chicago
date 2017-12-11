@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Mapping Graffiti in Chicago v3</title>
+    <title>Mapping Graffiti in Chicago</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,7 @@
     <!-- Import Bootstrap/Leaflet/My own CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 
     <!-- Import JavaScript -->
     <!-- Bootstrap, jQuery, D3, Leaflet -->
@@ -29,48 +29,56 @@
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Bivariate Map <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Introduction<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="hexbin.html">Hexbin Map</a>
+            <a class="nav-link" href="bivariate.html">Community Comparison</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatter.html">Recurring Graffiti</a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div id="sliderContainer" align="center">
-            <input class="slider" id="timeslide" type="range" min="0" max="4" value="0" step="1"/>
-            <span id="range" style="font-size: 36px; font-family: Prociono">2012</span>
-          </div>
-          <div id="map"></div>
-        </div>
-        <div class="col-md-6">
-          <div id="info"></div>
-          <div id="legend" height="300"></div>
-          <div class="row">
-            <div class="col-md-6">
-              <h5>Average Requests<br>per 10,000 Population</h5>
-            </div>
-            <div class="col-md-6">
-              <h5>Average Response Time</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6" id="frequency"></div>
-            <div class="col-md-6" id="response"></div>            
-          </div>
-          <div id="lineLegend"></div>
-        </div>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1 class="display-4">Mapping Graffiti in Chicago</h1>
+        <p class="lead" id="typeWritter"></p>
+        <a href="bivariate.html" class="btn btn-primary">Explore</a>
       </div>
-      <p style="float:left">Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> 311 Service Requests - Graffiti Removal</a></p>
-    </div>    
-    
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="comparison.js"></script>
-    <script type="text/javascript" src="legend.js"></script>
+    </div>
 
+    <div class="container">
+      <h2 class="page-header">5 years, 700,000+ graffiti incidents, visualized. </h2>
+      <hr>
+      <p class="lead">The battle against graffiti is never-ending in Chicago.</p>
+      <p>Graffiti is vandalism. It scars the community, lowers property values and diminishes residents’ quality of life. The Department of Streets and Sanitation provides free service for private property owners to remove graffiti upon 311 requests. The graffiti removal program is regarded as a model for other cities. Indeed, in the recent five years, annual total graffiti incidents decreased moderately to <span id="total"> </span> <mark>116,096 per year</mark> and average response time plummeted to <span id="response"> </span> <mark>less than one day</mark>. However, the efficiency improvement is inevitably costly. Annual spending on the program kept growing and soared to <span id="budget"> </span>  <mark>over $ 4.8 million</mark> in 2016.</p>
+      <hr>
+      <p class="lead">It is worthwhile taking a closer look at graffiti incidents in the city.</p>
+      <p>This interactive visualization project aims to analyze trends and patterns of graffiti removal requests from 2012 to 2016. The <a href="bivariate.html">Community Comparison Map</a> examines the graffiti density vs removal time at community level. The <a href="scatter.html">Recurring Graffiti Map</a> details locations with most recurring graffiti incidents over the years. Together they provide a panorama of the distribution and concentration of graffiti, and reveal persistent patterns of graffiti incidents in the City of Chicago.</p>
+      <hr> 
+      <p>Welcome to check out my static visualization portfolio on Chicago graffiti <a href="https://ran-bi.github.io/311DataViz/index.html">here</a>.</p>
+      <p>Data Source:<br> <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Graffiti-Removal/hec5-y4x5"> City of Chicago Data Portal - 311 Service Requests - Graffiti Removal</a><br><a href="https://www.census.gov/programs-surveys/acs/data.html">American Community Survey</a></p>
+      <p>View code on <a href="https://github.com/ran-bi/Mapping-Graffiti-in-Chicago">Github</a>
+      
+
+    <script type="text/javascript" src="script/sparkline.js"></script>
+    <script>
+      // Typewriter effect. Reference: https://www.w3schools.com/howto/howto_js_typewriter.asp
+      var i = 0;
+      var txt = 'Visualize the distribution, concentration, and response efficiency of 311 graffiti removal requests in the City of Chicago.'; /* The text */
+      var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+      function typeWriter() {
+        if (i < txt.length) {
+          document.getElementById("typeWritter").innerHTML += txt.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+      typeWriter();
+
+    </script>
   </body>
 </html>
